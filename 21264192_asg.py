@@ -24,17 +24,23 @@ def txt2story(text):
         f"The story must have a clear ending."
     )
 
-    output = pipe_txt2story(
-        prompt,
-        max_new_tokens=95,
-        do_sample=True,
-        temperature=0.7
-    )[0]["generated_text"]
+    for _ in range(3):
+        story_txt = pipe_txt2story(
+            prompt,
+            max_new_tokens=100,
+            do_sample=True,
+            temperature=0.7
+        )[0]["generated_text"]
 
-    if output.startswith(prompt):
-        output = output[len(prompt):].strip()
+        if story_txt.startswith(prompt):
+            story_txt = story_txt[len(prompt):].strip()
 
-    return output  
+        word_count = len(story_txt.split())
+        
+        if word_count <= 100 and story_txt.endswith((".", "!", "?")):
+            return story_txt
+
+    return story_txt 
 
 #function 3 : text to audio'
 def txt2audio(story_txt):
