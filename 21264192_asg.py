@@ -11,12 +11,12 @@ pipe_txt2audio = pipeline("text-to-audio", model="Matthijs/mms-tts-eng")
 #function 1 : image to text'
 def image2txt(image):
     image = Image.open(image)
-    txt = pipe_image2txt(image)[0]['generated_text']
-    return keyword
+    text = pipe_image2txt(image)[0]['generated_text']
+    return text
 
 #function 2 : text to a story'
 def txt2story(text):
-    story_txt = pipe_txt2story(txt)[0]['generated_text']
+    story_txt = pipe_txt2story(text)[0]['generated_text']
     return story_txt    
 
 #function 3 : text to audio'
