@@ -43,8 +43,8 @@ def txt2audio(story_txt):
 
 
 def main():
-  st.set_page_config(page_title="Your Image to Audio Story", page_icon="😊")
-  st.header("Turn Your Image to Audio Story")
+  st.set_page_config(page_title="Your Image to Audio Children Story", page_icon="😊")
+  st.header("Turn Your Image to Audio Children Story")
   uploaded_file = st.file_uploader("Select an Image...")
 
   if uploaded_file is not None:
