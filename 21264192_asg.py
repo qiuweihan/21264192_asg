@@ -20,7 +20,7 @@ def txt2story(text):
     return story_txt    
 
 #function 3 : text to audio'
-def text2audio(story_txt):
+def txt2audio(story_txt):
     audio_data = pipe_txt2audio(story_txt)
     return audio_data
 
