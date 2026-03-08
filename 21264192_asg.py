@@ -5,7 +5,7 @@ from PIL import Image
 #introduce models
 
 pipe_image2txt = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
-pipe_txt2story = pipeline("text-generation", model="pranavpsv/genre-story-generator-v2")
+pipe_txt2story = pipeline("text-generation",model="Qwen/Qwen2.5-0.5B-Instruct")
 pipe_txt2audio = pipeline("text-to-audio", model="Matthijs/mms-tts-eng")
 
 #function 1 : image to text'
@@ -13,16 +13,32 @@ def image2txt(image):
     image = Image.open(image)
     text = pipe_image2txt(image)[0]['generated_text']
     return text
-
+    
 #function 2 : text to a story'
 def txt2story(text):
-    story_txt = pipe_txt2story(text,max_new_tokens=100)[0]['generated_text']
-    return story_txt    
+
+    prompt = (
+        f"You are a storyteller for children aged 3 to 10. "
+        f"Write a simple story of no more than 100 words based on this description: {text}"
+    )
+
+    output = pipe_txt2story(
+        prompt,
+        max_new_tokens=120,
+        do_sample=True,
+        temperature=0.7
+    )[0]["generated_text"]
+
+    if output.startswith(prompt):
+        output = output[len(prompt):].strip()
+
+    return output  
 
 #function 3 : text to audio'
 def txt2audio(story_txt):
     audio_data = pipe_txt2audio(story_txt)
     return audio_data
+
 
 def main():
   st.set_page_config(page_title="Your Image to Audio Story", page_icon="😊")
