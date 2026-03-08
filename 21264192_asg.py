@@ -2,25 +2,26 @@ from transformers import pipeline
 import streamlit as st
 from PIL import Image
 
-#function 1 : image to text'
-pipe_image2text = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
+#introduce models
 
-#input the picture
+pipe_image2txt = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
+pipe_txt2story = pipeline("text-generation", model="pranavpsv/genre-story-generator-v2")
+pipe_txt2audio = pipeline("text-to-audio", model="Matthijs/mms-tts-eng")
+
+#function 1 : image to text'
 def image2txt(image):
     image = Image.open(image)
-    text = pipe_image2text(image)[0]['generated_text']
-    return text
+    txt = pipe_image2txt(image)[0]['generated_text']
+    return keyword
 
 #function 2 : text to a story'
 def txt2story(text):
-    pipe = pipeline("text-generation", model="pranavpsv/genre-story-generator-v2")
-    story_txt = pipe(text)[0]['generated_text']
-    return story_txt
+    story_txt = pipe_txt2story(txt)[0]['generated_text']
+    return story_txt    
 
 #function 3 : text to audio'
-def txt2audio(story_text):
-    pipe = pipeline("text-to-audio", model="Matthijs/mms-tts-eng")
-    audio_data = pipe(story_text)
+def text2audio(story_txt):
+    audio_data = pipe_txt2audio(story_txt)
     return audio_data
 
 def main():
