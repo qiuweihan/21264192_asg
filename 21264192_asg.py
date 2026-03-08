@@ -24,7 +24,7 @@ def txt2story(text):
         f"The story must have a clear ending."
     )
 
-    for _ in range(3):
+    for _ in range(5):
         story_txt = pipe_txt2story(
             prompt,
             max_new_tokens=100,
