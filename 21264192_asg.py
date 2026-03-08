@@ -24,7 +24,7 @@ def txt2story(text):
 
     output = pipe_txt2story(
         prompt,
-        max_new_tokens=120,
+        max_new_tokens=100,
         do_sample=True,
         temperature=0.7
     )[0]["generated_text"]
