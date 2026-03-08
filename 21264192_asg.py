@@ -8,17 +8,17 @@ pipe_image2text = pipeline("image-to-text", model="Salesforce/blip-image-caption
 #input the picture
 def image2txt(image):
     image = Image.open(image)
-    keyword = pipe_image2text(image)[0]['generated_text']
-    return keyword
+    text = pipe_image2text(image)[0]['generated_text']
+    return text
 
 #function 2 : text to a story'
 def txt2story(text):
     pipe = pipeline("text-generation", model="pranavpsv/genre-story-generator-v2")
-    story_txt = pipe(keyword)[0]['generated_text']
+    story_txt = pipe(text)[0]['generated_text']
     return story_txt
 
 #function 3 : text to audio'
-def text2audio(story_text):
+def txt2audio(story_text):
     pipe = pipeline("text-to-audio", model="Matthijs/mms-tts-eng")
     audio_data = pipe(story_text)
     return audio_data
