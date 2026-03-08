@@ -19,7 +19,9 @@ def txt2story(text):
 
     prompt = (
         f"You are a storyteller for children aged 3 to 10. "
-        f"Write a simple story of no more than 100 words based on this description: {text}"
+        f"Write a simple, complete children's story in 70 to 85 words "
+        f"based on this description: {text} "
+        f"The story must have a clear ending."
     )
 
     output = pipe_txt2story(
