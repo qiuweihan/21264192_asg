@@ -19,14 +19,14 @@ def txt2story(text):
 
     prompt = (
         f"You are a storyteller for children aged 3 to 10. "
-        f"Write a simple, complete children's story in 80 to 100 words "
+        f"Write a simple, complete children's story no more than 100 words "
         f"based on this description:{text}"
         )
 
     for _ in range(3):
         story_txt = pipe_txt2story(
             prompt,
-            max_new_tokens=80,
+            max_new_tokens=90,
             do_sample=True,
             temperature=0.7
         )[0]["generated_text"]
