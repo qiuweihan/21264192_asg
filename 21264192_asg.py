@@ -16,7 +16,7 @@ def image2txt(image):
 
 #function 2 : text to a story'
 def txt2story(text):
-    story_txt = pipe_txt2story(text)[0]['generated_text']
+    story_txt = pipe_txt2story(text,max_new_tokens=100)[0]['generated_text']
     return story_txt    
 
 #function 3 : text to audio'
